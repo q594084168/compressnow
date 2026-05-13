@@ -1,0 +1,21 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 01481d667e4c36c75b1965b09015cd6c
+          projectName: compressnow
+          directory: .
+          branch: master
